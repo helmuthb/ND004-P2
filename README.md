@@ -14,11 +14,11 @@ Use the command line (e.g. Terminal app on OSX or Linux, or CMD on Windows).
 Go to the subdirectoy directory `vagrant` and start the Vagrant VM with the
 command `vagrant up`. Then connect to the VM with `vagrant ssh`:
 ```
-  cd ./vagrant
+  cd vagrant
   vagrant up
   vagrant ssh
 ```
-Alternatively you can use an SSH client (e.g. putty) and connect with `localhost` on port `2222`.
+Instead of `vagrant ssh` you can use an SSH client (e.g. putty) and connect with `localhost` on port `2222`.
 Use username `vagrant` and password `vagrant` when asked for login details.
 
 In the virtual machine, first you have to create the database, tables and views.
