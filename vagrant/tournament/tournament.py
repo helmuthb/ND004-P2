@@ -25,6 +25,7 @@ def deletePlayers():
     """Remove all the player records from the database."""
     db = connect()
     cur = db.cursor()
+    # since matches reference players we delete them as well
     cur.execute("DELETE FROM matches")
     cur.execute("DELETE FROM players")
     cur.close()
@@ -54,6 +55,8 @@ def registerPlayer(name):
     """
     db = connect()
     cur = db.cursor()
+    # we do not specify the id as this will be provided by PostgreSQL
+    # note that python requires at least one "," to specify a tuple
     cur.execute("INSERT INTO players (name) VALUES (%s)", (name,))
     cur.close()
     db.commit()
@@ -75,6 +78,7 @@ def playerStandings():
     """
     db = connect()
     cur = db.cursor()
+    # refresh the materialized view to hold up-to-date data
     cur.execute("REFRESH MATERIALIZED VIEW standings")
     cur.execute("SELECT * FROM ordered_standings")
     standings = cur.fetchall()
@@ -118,6 +122,7 @@ def swissPairings():
     """
     db = connect()
     cur = db.cursor()
+    # refresh the materialized view to hold up-to-date data
     cur.execute("REFRESH MATERIALIZED VIEW standings")
     cur.execute("SELECT id, name FROM ordered_standings")
     players = cur.fetchall()

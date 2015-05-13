@@ -7,9 +7,30 @@ Nanodegree, implementing a relational database for tournament results.
 
 To use this program one has to have [Vagrant](http://vagrantup.com/)
 and [VirtualBox](https://www.virtualbox.org/) installed.
-Using the command line, launch the Vagrant VM with the command
-`vagrant up` while in the directory `vagrant`.
 
+## Running the application
+
+Use the command line (e.g. Terminal app on OSX or Linux, or CMD on Windows).
+Go to the subdirectoy directory `vagrant` and start the Vagrant VM with the
+command `vagrant up`. Then connect to the VM with `vagrant ssh`:
+```
+  cd ./vagrant
+  vagrant up
+  vagrant ssh
+```
+Alternatively you can use an SSH client (e.g. putty) and connect with `localhost` on port `2222`.
+Use username `vagrant` and password `vagrant` when asked for login details.
+
+In the virtual machine, first you have to create the database, tables and views.
+```
+  cd /vagrant/tournament
+  psql -f ./tournament.sql
+```
+
+To run the test scripts use the following command on the virtual machine's commandline while in the directory `/vagrant/tournament`:
+```
+  python tournament_test.py
+```
 ## Database design
 
 I used some PostgreSQL special features for performance enhancements.

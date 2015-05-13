@@ -1,7 +1,8 @@
 -- Table definitions for the tournament project.
 --
 
--- 1. create database
+-- 1. create database (drop if it exists)
+DROP DATABASE IF EXISTS tournament;
 CREATE DATABASE tournament;
 
 -- 2. use the newly created database

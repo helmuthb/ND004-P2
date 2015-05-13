@@ -4,6 +4,7 @@
 
 from tournament import *
 
+
 def testDeleteMatches():
     deleteMatches()
     print "1. Old matches can be deleted."
@@ -63,10 +64,11 @@ def testStandingsBeforeMatches():
     registerPlayer("Randy Schwartz")
     standings = playerStandings()
     if len(standings) < 2:
-        raise ValueError("Players should appear in playerStandings even before "
-                         "they have played any matches.")
+        raise ValueError("Players should appear in playerStandings even "
+                         "before they have played any matches.")
     elif len(standings) > 2:
-        raise ValueError("Only registered players should appear in standings.")
+        raise ValueError("Only registered players should appear in "
+                         " standings.")
     if len(standings[0]) != 4:
         raise ValueError("Each playerStandings row should have four columns.")
     [(id1, name1, wins1, matches1), (id2, name2, wins2, matches2)] = standings
@@ -74,9 +76,10 @@ def testStandingsBeforeMatches():
         raise ValueError(
             "Newly registered players should have no matches or wins.")
     if set([name1, name2]) != set(["Melpomene Murray", "Randy Schwartz"]):
-        raise ValueError("Registered players' names should appear in standings, "
-                         "even if they have no matches played.")
-    print "6. Newly registered players appear in the standings with no matches."
+        raise ValueError("Registered players' names should appear "
+                         "in standings, even if they have no matches played.")
+    print ("6. Newly registered players appear in the standings with no "
+           "matches.")
 
 
 def testReportMatches():
@@ -95,9 +98,11 @@ def testReportMatches():
         if m != 1:
             raise ValueError("Each player should have one match recorded.")
         if i in (id1, id3) and w != 1:
-            raise ValueError("Each match winner should have one win recorded.")
+            raise ValueError("Each match winner should have "
+                             "one win recorded.")
         elif i in (id2, id4) and w != 0:
-            raise ValueError("Each match loser should have zero wins recorded.")
+            raise ValueError("Each match loser should have "
+                             "zero wins recorded.")
     print "7. After a match, players have updated standings."
 
 
@@ -145,8 +150,10 @@ def testOddPairings():
     actual_pairs = set([frozenset([pid1, pid2]), frozenset([pid3, pid4])])
     if correct_pairs1 != actual_pairs and correct_pairs2 != actual_pairs:
         raise ValueError(
-            "After one match, players with one win should be paired or the best player gets a lucky ticket")
-    print "9. After one match, players with one win are paired or the best player gets a lucky ticket."
+            "After one match, players with one win should be paired or "
+            "the best player gets a lucky ticket")
+    print ("9. After one match, players with one win are paired or "
+           "the best player gets a lucky ticket.")
 
 
 def testRepeatedCombination():
@@ -158,8 +165,8 @@ def testRepeatedCombination():
     registerPlayer("Pinkie Pie")
     standings = playerStandings()
     [id1, id2, id3, id4] = [row[0] for row in standings]
-    reportMatch(id1, id2) # report a draw
-    reportMatch(id3, id4, True) # report a draw
+    reportMatch(id1, id2)
+    reportMatch(id3, id4, True)  # report a draw
     pairings = swissPairings()
     if len(pairings) != 2:
         raise ValueError(
@@ -169,8 +176,8 @@ def testRepeatedCombination():
     correct_pairs2 = set([frozenset([id1, id4]), frozenset([id2, id3])])
     actual_pairs = set([frozenset([pid1, pid2]), frozenset([pid3, pid4])])
     if correct_pairs1 != actual_pairs and correct_pairs2 != actual_pairs:
-        raise ValueError(
-            "After one match, players should not be playing in an old pairing.")
+        raise ValueError("After one match, players should not be playing"
+                         " in an old pairing.")
     print "10. After one match, players will not be playing in an old pairing."
 
 
@@ -192,7 +199,8 @@ def testReportDrawMatches():
         if i == id3 and w != 1:
             raise ValueError("Each match winner should have one win recorded.")
         elif i in (id1, id2, id4) and w != 0:
-            raise ValueError("Each match loser / draw should have zero wins recorded.")
+            raise ValueError("Each match loser / draw should have zero wins"
+                             " recorded.")
     print "11. After a match, players have updated standings even after draws."
 
 
@@ -209,5 +217,3 @@ if __name__ == '__main__':
     testRepeatedCombination()
     testReportDrawMatches()
     print "Success!  All tests pass!"
-
-
